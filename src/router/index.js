@@ -15,7 +15,7 @@ Router.prototype.push = function push(location, onResolve, onReject) {
 
 let routes = [
     {
-      path: '/login',
+      path: '/user',
       name: 'login',
       component: login
     },

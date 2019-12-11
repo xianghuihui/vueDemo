@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 //ElementUI
 import Element from 'element-ui'
-
+import axios from 'axios'
 import 'element-ui/lib/theme-chalk/index.css'
 import './style/theme.css'
 import 'font-awesome/css/font-awesome.min.css'
@@ -13,15 +13,19 @@ import 'font-awesome/css/font-awesome.min.css'
 Vue.config.productionTip = false
 
 Vue.use(Element)
+Vue.prototype.axios = axios;
+axios.defaults.timeout = 500000;
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
+axios.defaults.baseURL = "/api";
 
 //注册全局钩子用来拦截导航
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') {
+  if (to.path === '/user') {
     next();
   } else {
     let token = sessionStorage.getItem('token');
     if (token === null || token === '') {
-      next('/login');
+      next('/user');
     } else {
       next();
     }

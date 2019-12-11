@@ -135,7 +135,7 @@
           //清空
           sessionStorage.clear()
           //跳转到登录页
-          this.$router.push('/login');
+          this.$router.push('/user');
         }).catch(() => {
 
         });
