@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import Layout from '@/components/layout'
 import login from '@/components/login'
-import Dashboard from '@/components/Dashboard'
+import Dashboard from '@/components/dashboard'
 import Main from '@/components/Main'
 
 Vue.use(Router)
@@ -21,7 +22,7 @@ let routes = [
     },
     {
       path:'/',
-      component: Main,
+      component: Layout,
       hidden: true,
       meta : {
         requireAuth: true,

@@ -3,6 +3,7 @@
     <el-col :span="24" class="header">
       <el-col :span="5" class="logo" :class="'logo-width'">
         <a href="/" style="text-decoration:none;color:#FFFFFF;">
+          <img src="../assets/logo.png">
           后台管理系统
         </a>
       </el-col>
@@ -13,9 +14,10 @@
       </el-col>
       <el-col :span="10" class="userinfo">
         <el-dropdown trigger="hover">
-                    <span class="el-dropdown-link userinfo-inner">
-                        你好：{{ sysUserName }}
-                    </span>
+          <span class="el-dropdown-link userinfo-inner">
+            <img src="../assets/user.jpg">
+             你好：{{ sysUserName }}
+          </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
               <a href="#/">首页</a>
@@ -174,11 +176,11 @@
           cursor: pointer;
           color: #fff;
           img {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 20px;
-            margin: 10px 0 10px 10px;
-            float: right;
+            margin: 12px 10px 10px 10px;
+            float: left;
           }
         }
       }
@@ -194,7 +196,7 @@
         img {
           width: 40px;
           float: left;
-          margin: 10px 10px 10px 18px;
+          margin: 10px 10px 10px 0px;
         }
         .txt {
           color: #fff;

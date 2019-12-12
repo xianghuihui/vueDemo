@@ -33,7 +33,7 @@
     data () {
       return {
         userInfo :{
-          username : '张三',
+          username : '狒狒',
           password : '123456',
         },
         show : false,
