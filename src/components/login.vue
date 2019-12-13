@@ -2,7 +2,7 @@
     <div class="loginDiv">
       <div class="login_form">
         <el-form ref="loginForm">
-          <h2>登录</h2>
+          <h1>登录</h1>
           <el-form-item prop="username">
             <input type="text"  class="qxs-ic_user qxs-icon" @keyup.enter="handleLogin" placeholder="用户名" v-model="userInfo.username">
           </el-form-item>
@@ -33,8 +33,8 @@
     data () {
       return {
         userInfo :{
-          username : '狒狒',
-          password : '123456',
+          username : '',
+          password : '',
         },
         show : false,
         isLoging: false,
@@ -61,21 +61,31 @@
         }
         Login(params).then(res => {
           if (res.status == 200) {
-            sessionStorage.username = this.userInfo.username;
-            sessionStorage.token = "123456";
-            this.$notify({
-              title : '提示信息',
-              message : '登录成功',
-              type : 'success'
-            });
-            this.isLoging = false;
-            this.$router.push({path:'/'})
+            if(res.data.error_code == 1000){
+              sessionStorage.username = this.userInfo.username;
+              sessionStorage.token = "123456";
+              this.$notify({
+                title : '提示信息',
+                message : '登录成功',
+                type : 'success'
+              });
+              this.isLoging = false;
+              this.$router.push({path:'/'})
+            }else{
+              this.$notify({
+                title : '提示信息',
+                message : '密码错误',
+                type : 'error'
+              });
+              this.isLoging = false;
+            }
           }else {
             this.$notify({
               title : '提示信息',
-              message : '账号或密码错误',
+              message : '系统出错',
               type : 'error'
             });
+            this.isLoging = false;
           }
         })
         /*axios.get('http://localhost:3000/data?username='+this.userInfo.username+'&password='+this.userInfo.password)
@@ -130,9 +140,12 @@
   height: 380px;
   padding: 30px;
   background: rgba(255,255,255,0.3);
-  margin-top: 10%;
+  margin-top: 12%;
   color: white;
   border-radius: 5px;
+}
+.h1{
+  margin: 10px;
 }
 .qxs-ic_user {
   background: url("../assets/login/ic_user.png") no-repeat;

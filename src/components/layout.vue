@@ -10,8 +10,16 @@
         <el-col :span="5" class="logo" :class="'logo-width'">
           <a href="/" style="text-decoration:none;color:#FFFFFF;">
             <img src="../assets/logo.png">
-            后台管理系统
+            <!--后台管理系统-->
           </a>
+        </el-col>
+        <el-col :span="0.8">
+          <div class="tools" @click.prevent="collapse"  v-model="isCollapse">
+            <transition name="fade" mode="out-in">
+            <i v-if="!isCollapse" key="1" class="el-icon-s-fold"></i>
+            <i v-else key="2" class="el-icon-s-unfold"></i>
+            </transition>
+          </div>
         </el-col>
         <el-col :span="10" class="userinfo">
           <el-dropdown trigger="hover">
@@ -35,27 +43,28 @@
       </el-menu>
     </el-header>
     <el-container>
-      <el-aside width="230px">
+      <el-aside :style="isCollapse?{ 'width': '64px' }:{ 'width': '230px' }" class="sub-menu-leave-active">
         <el-menu
           default-active="1-4-1"
           class="el-menu-vertical-demo"
           background-color="#545c64"
           text-color="#fff"
-          active-text-color="#ffd04b">
+          active-text-color="#ffd04b"
+          :collapse="isCollapse">
           <el-submenu index="1">
             <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>用户管理</span>
+              <i class="el-icon-user"></i>
+              <span slot="title">用户管理</span>
             </template>
               <el-menu-item index="1-1">选项1</el-menu-item>
               <el-menu-item index="1-2">选项2</el-menu-item>
           </el-submenu>
           <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
+            <i class="el-icon-s-check"></i>
             <span slot="title">角色管理</span>
           </el-menu-item>
           <el-menu-item index="3">
-            <i class="el-icon-setting"></i>
+            <i class="el-icon-orange"></i>
             <span slot="title">权限管理</span>
           </el-menu-item>
         </el-menu>
@@ -71,14 +80,14 @@
         return {
           sysName: '后台管理系统',
           menuData: [],
-          collapsed: false,
-          sysUserName: sessionStorage.getItem('username')
+          sysUserName: sessionStorage.getItem('username'),
+          isCollapse: false,
         }
       },
       methods: {
         //注销
         logout: function(){
-          this.$confirm('确认删除?', '提示', {
+          this.$confirm('确认退出?', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'
@@ -91,12 +100,23 @@
           }).catch(() => {
 
           });
-        }
+        },
+        collapse: function() {
+          this.isCollapse = !this.isCollapse;
+        },
+
       }
     }
 </script>
 
 <style scoped="scoped" lang="scss">
+  .sub-menu-leave-active{
+    transition: all .4s ease;
+  }
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 230px;
+    min-height: 400px;
+  }
   .el-header{
     background-color: #B3C0D1;
     color: #333;
@@ -107,18 +127,19 @@
   .logo {
     height: 60px;
     font-size: 22px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-color: rgba(238, 241, 146, 0.3);
+    padding-left: 7px;
+    padding-right: 7px;
+    border-color: rgba(255, 255, 255, 0.3);
     border-right-width: 1px;
     border-bottom-width: 1px;
     border-right-style: solid;
+    border-bottom-style: solid;
   }
 
   .logo img {
-    width: 40px;
+    width: 220px;
     float: left;
-    margin: 10px 10px 10px 0px;
+    margin: 2px 0 0px 0px;
   }
   .logo .txt {
     color: #fff;
@@ -128,6 +149,15 @@
   }
   .logo-collapse-width {
     width: 60px;
+  }
+
+  .tools {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    cursor: pointer;
+    font-size: 28px;
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .userinfo {
@@ -145,12 +175,6 @@
         float: left;
       }
     }
-    /*.el-dropdown-menu{
-      a{
-        text-decoration: none;
-        color: white;
-      }
-    }*/
   }
   .el-aside {
     background-color: #D3DCE6;
