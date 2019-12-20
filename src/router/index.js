@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Layout from '@/components/layout'
-import login from '@/components/login'
-import Dashboard from '@/components/dashboard'
-import Main from '@/components/Main'
+import layout from '@/components/Layout'
+import login from '@/components/Login'
+import register from '@/components/register/register'
+import home from '@/components/Home'
 
 Vue.use(Router)
 
@@ -16,21 +16,26 @@ Router.prototype.push = function push(location, onResolve, onReject) {
 
 let routes = [
     {
-      path: '/user',
-      name: 'login',
+      path: '/login',
+      name: '登录',
       component: login
     },
     {
+      path: '/register',
+      name: '登录',
+      component: register
+    },
+    {
       path:'/',
-      component: Layout,
+      component: layout,
       hidden: true,
       meta : {
         requireAuth: true,
       },
       children: [{
         path: '/',
-        component:Dashboard,
-        name:'首页'
+        component: home,
+        name: '首页'
       }]
     }
 ]

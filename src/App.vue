@@ -37,11 +37,13 @@
   .el-submenu [class^=fa] {
     vertical-align: baseline;
     margin-right: 10px;
+    color: white;
   }
 
   .el-menu-item [class^=fa] {
     vertical-align: baseline;
     margin-right: 10px;
+    color: white;
   }
 
   .toolbar {

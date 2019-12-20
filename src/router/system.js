@@ -1,15 +1,16 @@
-import Main from '@/components/Main'
-import Contract from '@/components/system/Contract'
+
+import layout from '@/components/Layout'
+import user from '@/components/system/User'
 
 const SystemRouter = [{
   path: '/system',
-  name: '系统中心',
-  component: Main,
-  iconCls: 'fa fa-address-card',
+  name: '用户管理',
+  component: layout,
+  iconCls: 'fa fa-user',
   children: [{
-    path: '/system/contract',
-    component: Contract,
-    name: '联系人管理'
+    path: '/system/user',
+    component: user,
+    name: '普通用户管理'
   }]
 }]
 

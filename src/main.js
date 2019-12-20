@@ -9,28 +9,30 @@ import axios from 'axios'
 import 'element-ui/lib/theme-chalk/index.css'
 import './style/theme.css'
 import 'font-awesome/css/font-awesome.min.css'
+import echarts from 'echarts'
 
 Vue.config.productionTip = false
 
 Vue.use(Element)
+Vue.prototype.$echarts = echarts
 Vue.prototype.axios = axios;
 axios.defaults.timeout = 500000;
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 axios.defaults.baseURL = "/api";
 
 //注册全局钩子用来拦截导航
-router.beforeEach((to, from, next) => {
-  if (to.path === '/user') {
+/*router.beforeEach((to, from, next) => {
+  if (to.path === '/login'||to.path === '/register') {
     next();
   } else {
     let token = sessionStorage.getItem('token');
     if (token === null || token === '') {
-      next('/user');
+      next('/login');
     } else {
       next();
     }
   }
-});
+});*/
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
