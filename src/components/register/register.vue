@@ -37,6 +37,7 @@
 
 <script>
   import Loading from '../Loading.vue'
+  import {Register} from "@/api/user/register";
 
   export default {
     data () {
@@ -113,30 +114,21 @@
 
         this.isLoging = true;
 
-        /*Axios.post(api+"/order/select/reception", this.userInfo.phone)
-          .then(function (res) {
-            if(res.data.code==200){
-              console.log(res.data.data);
-              this.productResult=res.data.data;
-              this.productResult.length=3;
-            }else if(res.data.code==400){
-              alert(res.data.message)
-            }
-
-          }.bind(this))*/
-
         let params = {
           name: this.userInfo.username,
-          pwd: this.userInfo.password
+          password: this.userInfo.password,
+          phone: this.userInfo.phone,
+          avatar_url: "user.jpg"
         }
-        Login(params).then(res => {
+        console.log(params)
+        Register(params).then(res => {
+          console.log(res.data)
           if (res.status == 200) {
             if(res.data.error_code == 1000){
               sessionStorage.username = this.userInfo.username;
-              sessionStorage.token = "123456";
               this.$notify({
                 title : '提示信息',
-                message : '登录成功',
+                message : '注册成功',
                 type : 'success'
               });
               this.isLoging = false;
@@ -144,7 +136,7 @@
             }else{
               this.$notify({
                 title : '提示信息',
-                message : '密码错误',
+                message : res.data.error_msg,
                 type : 'error'
               });
               this.isLoging = false;
@@ -158,33 +150,6 @@
             this.isLoging = false;
           }
         })
-        /*axios.get('http://localhost:3000/data?username='+this.userInfo.username+'&password='+this.userInfo.password)
-          .then(res => {
-            /!*console.log(res.data)*!/
-            if(res.data.length > 0){
-              //this.$store.commit('setToken',res.data);
-              sessionStorage.username = this.userInfo.username;
-              //sessionStorage.token_expire = res.data.expire;
-              sessionStorage.token = res.data[0].token;
-              this.$notify({
-                title : '提示信息',
-                message : '登录成功',
-                type : 'success'
-              });
-              this.isLoging = false;
-              this.$router.push({path:'/'})
-            }else {
-              this.isLoging = false;
-              this.$notify({
-                title : '提示信息',
-                message : '账号或密码错误',
-                type : 'error'
-              });
-            }
-          })
-          .catch(err => {
-            console.log(err)
-        ``})*/
       }
     },
     mounted() {

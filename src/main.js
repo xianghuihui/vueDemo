@@ -21,7 +21,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 axios.defaults.baseURL = "/api";
 
 //注册全局钩子用来拦截导航
-/*router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   if (to.path === '/login'||to.path === '/register') {
     next();
   } else {
@@ -32,7 +32,7 @@ axios.defaults.baseURL = "/api";
       next();
     }
   }
-});*/
+});
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

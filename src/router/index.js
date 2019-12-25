@@ -22,7 +22,7 @@ let routes = [
     },
     {
       path: '/register',
-      name: '登录',
+      name: '注册',
       component: register
     },
     {
