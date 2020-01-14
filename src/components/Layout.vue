@@ -21,8 +21,8 @@
         <el-col :span="10" class="userinfo">
           <el-dropdown trigger="hover">
             <span class="userinfo-inner">
-              <img src="../assets/user.jpg">
-               你好：{{ sysUserName }}狒狒
+               <img src="../assets/user.jpg">
+               你好：{{ sysUserName }}
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>

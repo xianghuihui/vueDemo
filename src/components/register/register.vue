@@ -8,21 +8,18 @@
               <el-form-item prop="username">
                 <input type="text"  class="qxs-ic_user qxs-icon" @keyup.enter="handleLogin" placeholder="用户名" v-model="userInfo.username">
               </el-form-item>
-              <el-form-item prop="password">
-                <input type="password"  class="qxs-ic_password qxs-icon" @keyup.enter="handleLogin" placeholder="密码" v-model="userInfo.password">
+              <el-form-item prop="phone">
+                <input type="text"  class="qxs-ic_phone qxs-icon" @keyup.enter="handleLogin" placeholder="手机号" v-model="userInfo.phone">
+                <div class="login-code">
+                  <button type="button" :disabled="disabled" @click="sendcode" class="btns">{{btntxt}}</button>
+                </div>
               </el-form-item>
             </div>
-            <el-form-item prop="phone">
-              <input type="text"  class="qxs-ic_phone" @keyup.enter="handleLogin" placeholder="手机号" v-model="userInfo.phone">
-              <div class="login-code">
-                <button type="button" :disabled="disabled" @click="sendcode" class="btns">{{btntxt}}</button>
-              </div>
-            </el-form-item>
             <el-form-item prop="code">
-              <input type="text"  class="qxs-ic_code qxs-ic_phone" @keyup.enter="handleLogin" placeholder="验证码" v-model="userInfo.code">
+              <input type="text"  class="qxs-ic_code" @keyup.enter="handleLogin" placeholder="验证码" v-model="userInfo.code">
             </el-form-item>
-            <el-button class="login_btn" type="primary" @click="handleLogin">登录</el-button>
-            <a href="/#/login" class="register">去登录</a>
+            <el-button class="login_btn" type="primary" @click="handleLogin">注册</el-button>
+            <a href="#/login" class="register">去登录</a>
           </el-form>
           <Loading v-if="isLoging" marginTop="-150px"></Loading>
         </div>
@@ -44,7 +41,6 @@
       return {
         userInfo :{
           username : '',
-          password : '',
           phone : '',
           code: ""
         },
@@ -93,11 +89,6 @@
           this.$message.error("请输入用户名");
           return;
         }
-        if(!this.userInfo.password){
-          this.$message.error("请输入密码");
-          return;
-        }
-
         var reg=11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
         //var url="/nptOfficialWebsite/apply/sendSms?mobile="+this.ruleForm.phone;
         if(!this.userInfo.phone){
@@ -116,9 +107,7 @@
 
         let params = {
           name: this.userInfo.username,
-          password: this.userInfo.password,
-          phone: this.userInfo.phone,
-          avatar_url: "user.jpg"
+          phone: this.userInfo.phone
         }
         console.log(params)
         Register(params).then(res => {
@@ -221,25 +210,21 @@
   background-position: 1%;
   outline: none;
 }
-.qxs-ic_password {
-  background: url("../../assets/login/ic_password.png") no-repeat;
-  background-position: 1%;
-  /*margin-bottom: 20px;*/
+.qxs-ic_phone {
+  width: 49%;
+  background: url("../../assets/login/ic_phone.png") no-repeat;
+  background-position: 2%;
   outline: none;
 }
-.qxs-ic_phone {
-  width: 200px;
+.qxs-ic_code{
+  width: 96.5%;
   height: 40px;
   border: 0;
   outline: none;
   border-radius: 6px;
   box-shadow: #BAD1F3 0px 0px 20px;
-  margin-bottom: 20px;
-  padding-left: 10px;
-}
-.qxs-ic_code{
-  width: 96.5%;
   margin-bottom: 30px;
+  padding-left: 10px;
 }
 .login-code{
   display: inline-block;

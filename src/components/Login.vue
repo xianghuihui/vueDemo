@@ -19,7 +19,7 @@
               </div>
             </el-form-item>
             <el-button class="login_btn" type="primary" @click="handleLogin">登录</el-button>
-            <a href="/#/register" class="register">去注册</a>
+            <a href="#/register" class="register">去注册</a>
             <div class="biggap third-party-title">
               <h5 class="text-center">
                 <span>第三方账号登录</span>
@@ -99,8 +99,8 @@
         this.isLoging = true;
 
         let params = {
-          name: this.userInfo.username,
-          pwd: this.userInfo.password
+          userName: this.userInfo.username,
+          passWord: this.userInfo.password
         }
         Login(params).then(res => {
           if (res.status == 200) {
@@ -109,7 +109,7 @@
               sessionStorage.token = "123456";
               this.$notify({
                 title : '提示信息',
-                message : '登录成功',
+                message : res.data.error_msg,
                 type : 'success'
               });
               this.isLoging = false;
@@ -117,7 +117,7 @@
             }else{
               this.$notify({
                 title : '提示信息',
-                message : '密码错误',
+                message : res.data.error_msg,
                 type : 'error'
               });
               this.isLoging = false;
